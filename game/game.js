@@ -16,15 +16,12 @@ const mapToMatrix = (map) => {
   return matrix;
 };
 
-const state = createTimeMachine(
-  {
-    health: 100,
-    positionX: 1,
-    positionY: 9,
-    matrix: mapToMatrix(map),
-  },
-  printGame
-);
+const state = {
+  health: 100,
+  positionX: 1,
+  positionY: 9,
+  matrix: mapToMatrix(map),
+};
 
 function printGame() {
   canvas.textContent = "";
@@ -80,7 +77,7 @@ const movePlayer = (x, y) => {
   if (cell.textContent === DISPLAY.HAZARD) {
     console.log(DISPLAY.HAZARD, "Health decreased!");
     state.health = state.health - 30;
-    // printStats();
+    printStats();
   } else if (
     cell.textContent === DISPLAY.INVISIBLE_HAZARD ||
     cell.textContent === DISPLAY.INVISIBLE_HAZARD_UNCOVERED
@@ -88,20 +85,20 @@ const movePlayer = (x, y) => {
     console.log(DISPLAY.INVISIBLE_HAZARD_UNCOVERED, "INVISIBLE HAZARD! Health decreased!");
     state.health = state.health - 50;
     state.matrix[newPositionY][newPositionX] = "U";
-    // printStats();
+    printStats();
   } else if (cell.textContent === DISPLAY.POTION) {
     console.log(DISPLAY.POTION, "You found the health potion!");
     state.health = 100;
     state.matrix[newPositionY][newPositionX] = " ";
-    // printStats();
+    printStats();
   } else if (cell.textContent === DISPLAY.TREASURE) {
     console.log(DISPLAY.TREASURE, "You found the treasure 🎉🎉🎉");
   }
   if (cell.textContent !== DISPLAY.OBSTACTLE) {
     state.positionX = newPositionX;
     state.positionY = newPositionY;
-    // drawPlayer();
-    // printGame(state.matrix);
+    drawPlayer();
+    printGame(state.matrix);
   }
 };
 
@@ -117,17 +114,21 @@ function addEventListeners() {
 
 function backInTime(seconds) {
   state.backInTime(seconds);
+  printGame();
 }
 
 function backward() {
   state.backward();
+  printGame();
 }
 
 function previousTimeline() {
   state.changeTimeline(-1);
+  printGame();
 }
 function nextTimeline() {
   state.changeTimeline(+1);
+  printGame();
 }
 addEventListeners();
 printGame();
