@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.healthStats {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  color: red;
+  font-weight: bold;
+}
+input[type="range"] {
+  accent-color: red;
+  pointer-events: none;
+}
+
+#buttons {
+  margin-top: 1rem;
+}
+button {
+  background-color: #ddd;
+  color: #333;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#timeline {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
