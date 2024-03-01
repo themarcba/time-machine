@@ -1,77 +1,21 @@
-# Demo Proxy
+# Time Machine with ES6 Proxies
 
-- Overwrite getters and setters
-- Return as function
+This is part of a talk I gave at [DevWorld Amsterdam 2024](https://devworldconference.com/).
 
-# Rewrite proxy to simple time machine
+## Code
 
-## Add reactivity
+The important code is in the [game/time-machine.js](./game/time-machine.js) file.
 
-onUpdate()
+The `createTimeMachine` function creates a proxy out of given data, and adds functionality for "traveling back in time".
 
-## Init state
+The basic idea is that we have an array of states (`target.states`), which holds a current timeline's state.
 
-```js
-{ states: [data], $currentIndex: 0 }
-```
+To make it a bit more fancy, there is also a `target.timelines` array, which is basically just one more abstraction layer. There can be various timelines, each with its own state. The timeline can also be switched.
 
-# Write simple setter
+- The proxy trap `set()` adds a new item to the states array.
+- The proxy trap `get()` provides a few functions that are exposed
 
-## Push new state to state array
+## Branches
 
-```js
-const currentState = target.states[target.$currentIndex];
-target.states.push({ ...currentState, [property]: value });
-```
-
-# Write getter
-
-## Return current state
-
-```js
-const currentState = target.states[target.$currentIndex];
-return currentState[property];
-```
-
-## Add 'currentState' getter
-
-```js
-if (property === "currentState") {
-  return currentState;
-}
-```
-
-## Add backward & forward getters
-
-```js
-else if (property === "backward") {
-    return () => {
-    target.states.pop(); // don't forget to pop()
-    target.currentIndex--;
-    onUpdate();
-    };
-} else if (property === "forward") {
-    return () => {
-    target.currentIndex++;
-    onUpdate();
-    };
-}
-```
-
-# Game Project
-
-## Add time machine to game
-
-## Add timestamps to states
-
-```js
-// Get target time
-const targetTime = new Date(new Date() - seconds * 1000);
-// Get target index
-const index = target.states.findIndex((state) => {
-  return state.timestamp > targetTime;
-});
-// Reset new index and erase the rest
-if (index !== -1) target.currentIndex = index;
-target.states = target.states.slice(0, target.currentIndex + 1);
-```
+The starting state is in the `start` branch.
+The final version is in the `main` branch.
