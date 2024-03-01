@@ -29,41 +29,39 @@
     <pre id="data"></pre>
     <script src="proxy.js"></script>
     <script>
-      const person = {
-        name: "John Doe",
-        age: 20,
-        health: 100,
-      };
+      const person = createTimeMachine(
+        {
+          name: "John Doe",
+          age: 20,
+          health: 100,
+        },
+        displayState
+      );
 
       function displayState() {
         document.querySelector("input[name=name]").value = person.name;
         document.querySelector("input[name=age]").value = person.age;
         document.querySelector("input[name=health]").value = person.health;
-        document.getElementById("data").innerHTML = JSON.stringify(person, null, 2);
+        document.getElementById("data").innerHTML = JSON.stringify(person.currentState, null, 2);
       }
 
       function decreaseAge() {
         const age = Number(document.querySelector("input[name=age]").value);
         person.age = age - 1;
-        displayState();
       }
       function increaseAge() {
         const age = Number(document.querySelector("input[name=age]").value);
         person.age = age + 1;
-        displayState();
       }
       function setHealth() {
         const health = Number(document.querySelector("input[name=health]").value);
         person.health = health;
-        displayState();
       }
       function forward() {
         person.forward();
-        displayState();
       }
       function backward() {
         person.backward();
-        displayState();
       }
 
       displayState();
