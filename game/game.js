@@ -16,12 +16,15 @@ const mapToMatrix = (map) => {
   return matrix;
 };
 
-const state = {
-  health: 100,
-  positionX: 1,
-  positionY: 9,
-  matrix: mapToMatrix(map),
-};
+const state = createTimeMachine(
+  {
+    health: 100,
+    positionX: 1,
+    positionY: 9,
+    matrix: mapToMatrix(map),
+  },
+  printGame
+);
 
 function printGame() {
   canvas.textContent = "";

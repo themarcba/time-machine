@@ -38,7 +38,7 @@ const createTimeMachine = (data, onUpdate = () => {}) => {
             const index = target.states.findIndex((state) => {
               return state.timestamp > targetTime;
             });
-            if (index !== -1) target.currentIndex = index;
+            target.currentIndex = index;
             target.states = target.states.slice(0, target.currentIndex + 1);
             onUpdate();
           };
