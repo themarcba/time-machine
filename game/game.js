@@ -67,7 +67,7 @@ const printStats = () => {
   healthStat.textContent = state.health;
   document.getElementById("health").value = state.health;
   document.getElementById("healthNumber").textContent = `${state.health}%`;
-  document.getElementById("timeline").textContent = `DEVWORLD-${state.$currentTimeline}`;
+  document.getElementById("timeline").textContent = `TIMELINE-${state.$currentTimeline}`;
 };
 
 const movePlayer = (x, y) => {
