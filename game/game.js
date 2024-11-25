@@ -1,3 +1,5 @@
+let timer = null;
+let timeStartedAt = null;
 const DISPLAY = {
   HAZARD: "🐍",
   POTION: "🧪",
@@ -49,6 +51,7 @@ function printGame() {
   });
   drawPlayer(state.positionX, state.positionY);
   printStats();
+  if (state.health <= 0) clearTimeout(timer);
 }
 
 const drawPlayer = () => {
@@ -71,6 +74,7 @@ const printStats = () => {
 };
 
 const movePlayer = (x, y) => {
+  if (!timer) startTimer();
   if (state.health <= 0) return;
   const newPositionX = state.positionX + x;
   const newPositionY = state.positionY + y;
@@ -96,6 +100,7 @@ const movePlayer = (x, y) => {
     // printStats();
   } else if (cell.textContent === DISPLAY.TREASURE) {
     console.log(DISPLAY.TREASURE, "You found the treasure 🎉🎉🎉");
+    clearTimeout(timer);
   }
   if (cell.textContent !== DISPLAY.OBSTACTLE) {
     state.positionX = newPositionX;
@@ -113,6 +118,20 @@ function addEventListeners() {
     else if (key === "ArrowLeft") movePlayer(-1, 0);
     else if (key === "ArrowRight") movePlayer(1, 0);
   });
+}
+
+function startTimer() {
+  timeStartedAt = new Date();
+  console.log(document.getElementById("timer"));
+
+  document.getElementById("timer").textContent = "00:00";
+  timer = setInterval(() => {
+    const totalSecondsPassed = Math.floor((new Date() - timeStartedAt) / 1000);
+    const secondsPassed = String(Math.floor(totalSecondsPassed % 60)).padStart(2, "0");
+    const minutesPassed = String(Math.floor(totalSecondsPassed / 60)).padStart(2, "0");
+
+    document.getElementById("timer").textContent = `${minutesPassed}:${secondsPassed}`;
+  }, 1000);
 }
 
 function backInTime(seconds) {
