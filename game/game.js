@@ -117,8 +117,13 @@ function backInTime(seconds) {
   printGame();
 }
 
-function backward() {
-  state.backward();
+function backwards() {
+  state.backwards();
+  printGame();
+}
+
+function forwards() {
+  state.forwards();
   printGame();
 }
 
