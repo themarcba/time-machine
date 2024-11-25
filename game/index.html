@@ -12,19 +12,19 @@
       <div>❤️ <span id="healthNumber">0</span></div>
       <input style="width: 100%" type="range" id="health" min="1" max="100" value="1" readonly />
     </div>
-    <div class="timlineInformation hasTimeMachine">
+    <div class="timlineInformation hasTimelines">
       <div id="timeline"></div>
     </div>
     <div id="canvas"></div>
-    <div id="buttons" class="hasTimeMachine">
-      <div>
-        <button onclick="backInTime(5)">Back in time (5 seconds)</button>
-        <button onclick="backward()">Backwards (in steps)</button>
-      </div>
-      <div style="margin-top: 0.5rem">
-        <button onclick="previousTimeline()">Previous timeline</button>
-        <button onclick="nextTimeline()">Next timeline</button>
-      </div>
+    <div class="buttons hasTimeMachine">
+      <button onclick="backwards()">Backwards (in steps)</button>
+      <button onclick="forwards()">Forwards (in steps)</button>
+      <button onclick="backInTime(5)">Back in time (5 seconds)</button>
+    </div>
+    <div class="buttons hasTimelines">
+      <hr />
+      <button onclick="previousTimeline()">Previous timeline</button>
+      <button onclick="nextTimeline()">Next timeline</button>
     </div>
     <script src="time-machine.js"></script>
     <script src="map.js"></script>
