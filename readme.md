@@ -1,6 +1,6 @@
 # Time Machine with ES6 Proxies
 
-This is part of a talk I gave at [DevWorld Amsterdam 2024](https://devworldconference.com/).
+This is part of a talk I gave at [DevWorld Amsterdam 2024](https://devworldconference.com/) and [Porto Tech Hub Conference 2024](https://portotechhub.com/).
 
 ## Code
 
